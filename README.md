@@ -4,7 +4,6 @@ _As early as possible in your application, import and use JsonJSEnv_
 
 ## with only values
 
-
 ```js
 const jsonJS = require("json-js-env");
 const env = require("env-var");
@@ -44,4 +43,38 @@ const SECRET_ACCESS_KEY2 = env
 console.log(PORT2); // { value: 2000 }
 console.log(ACCESS_KEY_ID2); // { value: 'access_key' }
 console.log(SECRET_ACCESS_KEY2); // { value: 'private!@#$DFSDF#$@#$%$%@#RFRFR#', sensitive: true }
+```
+
+## with JS file input
+
+### config.js
+
+```js
+module.exports = function () {
+  return {
+    PORT: 2000,
+    ACCESS_KEY_ID: "access_key",
+    SECRET_ACCESS_KEY: {
+      value: "private!@#$DFSDF#$@#$%$%@#RFRFR#",
+      sensitive: true,
+    },
+  };
+};
+```
+
+```js
+//Example 3, with JS file
+jsonJS({
+  file: "config.js", //Input fiile location
+  preserveAttributes: false, //Preverve variable attributes
+  replaceExistingENVs: false, //Whether to replace the existing process.env variables.
+});
+
+const PORT3 = env.get("PORT").required().asString();
+const ACCESS_KEY_ID3 = env.get("ACCESS_KEY_ID").required().asString();
+const SECRET_ACCESS_KEY3 = env.get("SECRET_ACCESS_KEY").required().asString();
+
+console.log(PORT3); //2000
+console.log(ACCESS_KEY_ID3); //access_key
+console.log(SECRET_ACCESS_KEY3); //private!@#$DFSDF#$@#$%$%@#RFRFR#
 ```

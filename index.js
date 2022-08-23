@@ -53,6 +53,9 @@ module.exports = function ({ file, preserveAttributes = false, replaceExistingEN
     var file_internal;
     if (file) {
         file_internal = file;
+        if (path.extname(file_internal) === ".js") {
+            isJS = true;
+        }
     } else {
         const jsonExists = fs.existsSync(DEFAULT_PATH_JSON);
         const jsExists = fs.existsSync(DEFAULT_PATH_JS);
@@ -67,8 +70,27 @@ module.exports = function ({ file, preserveAttributes = false, replaceExistingEN
         }
     }
 
-    const fileContent = fs.readFileSync(file_internal);
-    const jsonContent = JSON.parse(fileContent);
+    var fileContent;
+    if (!isJS) {
+        fileContent = fs.readFileSync(file_internal);
+    } else {
+        const jsFunction = require(path.join(require.main.path, file_internal));
+        if (typeof jsFunction !== "function") {
+            throw new Error("Config JS file does not export a default function")
+        }
+        try {
+            fileContent = jsFunction();
+        } catch (e) {
+            throw new Error(`Error while running the config JS file ${e}`);
+        }
+    }
+
+    var jsonContent;
+    if (!isJS) {
+        jsonContent = JSON.parse(fileContent);
+    } else {
+        jsonContent = fileContent;
+    }
 
     const output = processJSON(jsonContent, preserveAttributes);
     Object.entries(output).forEach(([k, v]) => {
