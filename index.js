@@ -18,25 +18,37 @@ function validateValue(k, v) {
     }
 }
 
-function validateTopLevelValue(k, v) {
+function validateTopLevelValue(k, v, preserveAttributes = false) {
     if (typeof v === "object") {
-        return validateValue(k, v.value);
+        if (preserveAttributes) {
+            return JSON.stringify(v);
+        } else {
+            return validateValue(k, v.value);
+        }
     } else if (checkAllowedTypes(v)) {
-        return v;
+        if (preserveAttributes) {
+            return JSON.stringify({ value: v });
+        } else {
+            return v;
+        }
     } else {
         throw new Error(`Unknown type for top level value(${typeof v})`);
     }
 }
 
-function processJSONWithoutAttr(json) {
+function processJSON(json, preserveAttributes) {
     const output = {};
     Object.entries(json).forEach(([k, v]) => {
-        output[k] = validateTopLevelValue(k, v);
+        output[k] = validateTopLevelValue(k, v, preserveAttributes);
     })
     return output;
 }
 
-module.exports = function (file, preserveAttributes = false, replaceExistingENVs = false) {
+/***
+ * 
+ * 
+ */
+module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false }) {
     var isJS = false;
     var file_internal;
     if (file) {
@@ -57,20 +69,18 @@ module.exports = function (file, preserveAttributes = false, replaceExistingENVs
 
     const fileContent = fs.readFileSync(file_internal);
     const jsonContent = JSON.parse(fileContent);
-    if (!preserveAttributes) {
-        const output = processJSONWithoutAttr(jsonContent);
-        Object.entries(output).forEach(([k, v]) => {
-            const exists = process.env[k];
-            if (exists) {
-                if (replaceExistingENVs) {
-                    process.env[k] = v;
-                }
-            } else {
+
+    const output = processJSON(jsonContent, preserveAttributes);
+    Object.entries(output).forEach(([k, v]) => {
+        const exists = process.env[k];
+        if (exists) {
+            if (replaceExistingENVs) {
                 process.env[k] = v;
             }
-        });
-        return output;
-    } else {
-        return {}
-    }
+        } else {
+            process.env[k] = v;
+        }
+    });
+    return output;
+
 }
