@@ -23,10 +23,13 @@ console.log(ACCESS_KEY_ID); //access_key
 console.log(SECRET_ACCESS_KEY); //private!@#$DFSDF#$@#$%$%@#RFRFR#
 ```
 
-## with attrobutes
+## with attributes
 
 ```js
 //Example 2, with attributes
+const jsonJS = require("json-js-env");
+const env = require('env-var');
+
 jsonJS({
   //file: "inputFile.json", //Input fiile location
   preserveAttributes: true, //Preverve variable attributes
@@ -64,6 +67,9 @@ module.exports = function () {
 
 ```js
 //Example 3, with JS file
+const jsonJS = require("json-js-env");
+const env = require('env-var');
+
 jsonJS({
   file: "config.js", //Input fiile location
   preserveAttributes: false, //Preverve variable attributes
