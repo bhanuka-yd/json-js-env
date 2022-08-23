@@ -1,6 +1,9 @@
 # Read configuration values from JSON files to environment variables
 
+_As early as possible in your application, import and use JsonJSEnv_
+
 ## with only values
+
 
 ```js
 const jsonJS = require("json-js-env");
