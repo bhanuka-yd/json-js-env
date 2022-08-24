@@ -1,4 +1,4 @@
-# Read configuration values from JSON files to environment variables
+# Read configuration values from JSON and JS files to environment variables
 
 _As early as possible in your application, import and use JsonJSEnv_
 
