@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const appRoot = require('app-root-path');
 
 const JSON_FILE_NAME = ".env.json";
 const DEFAULT_PATH_JSON = path.join(require.main.path, JSON_FILE_NAME);
@@ -48,7 +47,7 @@ function processJSON(json, preserveAttributes) {
  * 
  * 
  */
-module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false }) {
+module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false } = {}) {
     var isJS = false;
     var file_internal;
     if (file) {
