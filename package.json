@@ -1,7 +1,7 @@
 {
   "name": "json-js-env",
   "version": "1.0.0",
-  "description": "",
+  "description": "Loads environment variables from json and js files for nodejs projects.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
