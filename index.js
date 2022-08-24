@@ -47,7 +47,7 @@ function processJSON(json, preserveAttributes) {
  * 
  * 
  */
-module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false }) {
+module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false } = {}) {
     var isJS = false;
     var file_internal;
     if (file) {
