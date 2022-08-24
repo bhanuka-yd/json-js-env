@@ -24,7 +24,7 @@ const env = require("env-var");
 //Example 1
 jsonJS({
   //file: "inputFile.json", //Input fiile location
-  preserveAttributes: false, //Preverve variable attributes
+  preserveAttributes: false, //Preserve variable attributes
   replaceExistingENVs: false, //Whether to replace the existing process.env variables.
 });
 const PORT = env.get("PORT").required().asString();
@@ -45,7 +45,7 @@ const env = require("env-var");
 
 jsonJS({
   //file: "inputFile.json", //Input fiile location
-  preserveAttributes: true, //Preverve variable attributes
+  preserveAttributes: true, //Preserve variable attributes
   replaceExistingENVs: true, //Whether to replace the existing process.env variables.
 });
 
@@ -85,7 +85,7 @@ const env = require("env-var");
 
 jsonJS({
   file: "config.js", //Input fiile location
-  preserveAttributes: false, //Preverve variable attributes
+  preserveAttributes: false, //Preserve variable attributes
   replaceExistingENVs: false, //Whether to replace the existing process.env variables.
 });
 
