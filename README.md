@@ -2,6 +2,19 @@
 
 _As early as possible in your application, import and use JsonJSEnv_
 
+### Example input file
+
+```json
+{
+  "PORT": 2000,
+  "ACCESS_KEY_ID": "access_key",
+  "SECRET_ACCESS_KEY": {
+    "value": "private!@#$DFSDF#$@#$%$%@#RFRFR#",
+    "sensitive": true
+  }
+}
+```
+
 ## with only values
 
 ```js
@@ -28,7 +41,7 @@ console.log(SECRET_ACCESS_KEY); //private!@#$DFSDF#$@#$%$%@#RFRFR#
 ```js
 //Example 2, with attributes
 const jsonJS = require("json-js-env");
-const env = require('env-var');
+const env = require("env-var");
 
 jsonJS({
   //file: "inputFile.json", //Input fiile location
@@ -68,7 +81,7 @@ module.exports = function () {
 ```js
 //Example 3, with JS file
 const jsonJS = require("json-js-env");
-const env = require('env-var');
+const env = require("env-var");
 
 jsonJS({
   file: "config.js", //Input fiile location
