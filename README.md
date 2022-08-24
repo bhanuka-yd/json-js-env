@@ -2,6 +2,11 @@
 
 _As early as possible in your application, import and use JsonJSEnv_
 
+### Default file names (in project root)
+
+- .env.json
+- .env.js
+
 ### Example input file
 
 ```json
