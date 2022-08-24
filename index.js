@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const appRoot = require('app-root-path');
 
 const JSON_FILE_NAME = ".env.json";
 const DEFAULT_PATH_JSON = path.join(require.main.path, JSON_FILE_NAME);
