@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "Bhanuka Yd<05_picador_lockets@icloud.com>",
-  "license": "ISC",
-  "dependencies": {
-    "app-root-path": "^3.1.0"
-  }
+  "license": "ISC"
 }
