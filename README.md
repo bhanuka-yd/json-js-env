@@ -1,5 +1,11 @@
 # Read configuration values from JSON and JS files to environment variables
 
+## Installation
+
+```
+npm i json-js-env
+```
+
 _As early as possible in your application, import and use JsonJSEnv_
 
 ### Default file names (in project root)
