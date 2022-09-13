@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path"
 
 const JSON_FILE_NAME = ".env.json";
-const DEFAULT_PATH_JSON = path.join(require.main.path, JSON_FILE_NAME);
-const DEFAULT_PATH_JS = path.join(require.main.path, ".env.js");
+const DEFAULT_PATH_JSON = path.join(process.cwd(), JSON_FILE_NAME);
+const DEFAULT_PATH_JS = path.join(process.cwd(), ".env.js");
 
 function checkAllowedTypes(v) {
     return typeof v === 'number' || typeof v === "string" || typeof v === "bigint";
@@ -47,7 +47,7 @@ function processJSON(json, preserveAttributes) {
  * 
  * 
  */
-module.exports = function ({ file, preserveAttributes = false, replaceExistingENVs = false } = {}) {
+export default function ({ file, preserveAttributes = false, replaceExistingENVs = false } = {}) {
     var isJS = false;
     var file_internal;
     if (file) {
@@ -103,5 +103,4 @@ module.exports = function ({ file, preserveAttributes = false, replaceExistingEN
         }
     });
     return output;
-
 }
