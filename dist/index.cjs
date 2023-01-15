@@ -12,7 +12,7 @@ const JSON_FILE_NAME = ".env.json";
 const DEFAULT_PATH_JSON = path__default.join(process.cwd(), JSON_FILE_NAME);
 const DEFAULT_PATH_JS = path__default.join(process.cwd(), ".env.js");
 function checkAllowedTypes(v) {
-  return typeof v === "number" || typeof v === "string" || typeof v === "bigint";
+  return typeof v === "number" || typeof v === "string" || typeof v === "boolean" || typeof v === "bigint";
 }
 function validateValue(k, v) {
   if (checkAllowedTypes(v)) {
